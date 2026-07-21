@@ -1,5 +1,5 @@
 //Version_JS;Version_TInjectMin;Version_CEF4Min;
-//3.3.0.1;1.0.0.9;78.3.0
+//3.3.0.2;1.0.0.9;78.3.0
 
 function getAllGroupContacts(Contacts) {
 	SetConsoleMessage("GetAllGroupContacts", JSON.stringify(Contacts));	
@@ -718,7 +718,10 @@ window.WAPI._serializeMessageObj = (obj) => {
 	const _chat = obj['chat'] ? WAPI._serializeChatObj(obj['chat']) : {};
 
     return Object.assign(window.WAPI._serializeRawObj(obj), {
-        id: obj.id._serialized,
+        //( Gabriel Rocha - 21/07/2026
+        //id: obj.id._serialized,
+		id: obj.id.fromMe + '_' + obj.id.remote + '_' + obj.id.id, 
+		completeId: obj.id,//)
         //add 02/06/2020 mike -->
 		quotedParticipant: obj.quotedParticipant? obj.quotedParticipant._serialized ? obj.quotedParticipant._serialized : undefined : undefined,
         author: obj.author? obj.author._serialized ? obj.author._serialized : undefined : undefined,
